@@ -5,6 +5,7 @@
     width="600px"
     :confirm-loading="importing"
     :mask-closable="false"
+    :draggable="true"
     @ok="handleImport"
     @cancel="handleCancel"
   >
@@ -21,7 +22,7 @@
             <p>支持通过上传CSV文件批量导入设备，文件格式要求：</p>
             <ul>
               <li>文件编码：UTF-8</li>
-              <li>必需列：alias (设备别名), url (设备地址), username (用户名), password (密码)</li>
+              <li>必需列：url (设备地址), username (用户名), password (密码)</li>
               <li>设备地址格式：http://ip:port</li>
               <li>导入时不会验证设备连通性，设备将被标记为离线状态</li>
             </ul>
@@ -124,8 +125,7 @@ const visible = computed({
 
 // 预览表格列
 const previewColumns: TableColumnsType = [
-  { title: '设备别名', dataIndex: 'alias', width: 150 },
-  { title: '设备地址', dataIndex: 'url', width: 200, ellipsis: true },
+  { title: '设备地址', dataIndex: 'url', width: 250, ellipsis: true },
   { title: '用户名', dataIndex: 'username', width: 120 },
   { title: '密码', dataIndex: 'password', width: 120, customRender: () => '******' },
   { title: '状态', dataIndex: 'valid', width: 80, customRender: ({ text }) => text ? '有效' : '无效' }
@@ -138,7 +138,7 @@ const invalidRows = computed(() => totalRows.value - validRows.value)
 
 // 下载CSV模板
 const downloadTemplate = () => {
-  const csvContent = 'alias,url,username,password\n停车场A算力设备,http://192.168.1.100:8000,admin,admin123\n工厂B边缘盒子,http://192.168.1.101:8000,admin,admin123'
+  const csvContent = 'url,username,password\nhttp://192.168.1.100:8000,admin,admin123\nhttp://192.168.1.101:8000,admin,admin123'
   const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8' })
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
@@ -190,7 +190,7 @@ const parseCSVText = (text: string) => {
   }
 
   const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''))
-  const requiredHeaders = ['alias', 'url', 'username', 'password']
+  const requiredHeaders = ['url', 'username', 'password']
   
   // 检查必需的列
   const missingHeaders = requiredHeaders.filter(h => !headers.includes(h))
@@ -215,10 +215,6 @@ const parseCSVText = (text: string) => {
     })
 
     // 验证必填字段
-    if (!rowData.alias) {
-      errorMessages.push('设备别名不能为空')
-      isValid = false
-    }
     if (!rowData.url) {
       errorMessages.push('设备地址不能为空')
       isValid = false
@@ -243,7 +239,6 @@ const parseCSVText = (text: string) => {
 
     if (isValid) {
       devices.push({
-        name: rowData.alias,
         api_base_url: rowData.url,
         username: rowData.username,
         password: rowData.password

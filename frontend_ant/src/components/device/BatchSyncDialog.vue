@@ -5,6 +5,7 @@
     width="600px"
     :closable="false"
     :mask-closable="false"
+    :draggable="true"
     class="batch-sync-modal"
   >
     <div class="sync-progress-content">

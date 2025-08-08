@@ -4,6 +4,7 @@
     title="编辑设备"
     :confirm-loading="loading"
     :mask-closable="false"
+    :draggable="true"
     @ok="handleSubmit"
     @cancel="handleCancel"
   >

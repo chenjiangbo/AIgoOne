@@ -13,8 +13,8 @@
     >
       <!-- 设备信息列 -->
       <template #deviceInfo="{ record }">
-        <div class="device-info">
-          <div class="device-name">
+        <div class="device-info" :class="`device-status-${record.status}`">
+          <div class="device-name" :data-status="record.status">
             {{ record.name || '未命名设备' }}
           </div>
           <div class="device-meta">
@@ -351,14 +351,84 @@ defineExpose({
 }
 
 .device-info {
-  padding: 4px 0;
+  padding: 6px 0;
+  position: relative;
 }
 
 .device-info .device-name {
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 6px;
-  font-size: 14px;
+  margin-bottom: 8px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.device-info .device-name::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-neutral-400);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+/* 基于设备状态的动态指示器 */
+.device-name[data-status="online"]::before {
+  background: var(--color-success-500);
+  box-shadow: 0 0 8px rgba(82, 196, 26, 0.6);
+}
+
+.device-name[data-status="offline"]::before {
+  background: var(--color-neutral-400);
+  box-shadow: none;
+  animation: none;
+}
+
+.device-name[data-status="error"]::before {
+  background: var(--color-error-500);
+  box-shadow: 0 0 8px rgba(255, 77, 79, 0.6);
+  animation: pulse-error 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes pulse-error {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(255, 77, 79, 0.6);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.15);
+    box-shadow: 0 0 12px rgba(255, 77, 79, 0.8);
+  }
+}
+
+/* 设备状态相关样式 */
+.device-status-online {
+  border-left: 2px solid var(--color-success-200);
+}
+
+.device-status-offline {
+  border-left: 2px solid var(--color-neutral-200);
+}
+
+.device-status-error {
+  border-left: 2px solid var(--color-error-200);
 }
 
 .device-meta {
@@ -370,20 +440,37 @@ defineExpose({
 .meta-item {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   font-size: 13px;
+  padding: 1px 0;
+  transition: all 0.2s ease;
+}
+
+.meta-item:hover {
+  background: rgba(64, 169, 255, 0.05);
+  border-radius: 4px;
+  padding: 2px 6px;
 }
 
 .meta-label {
   color: var(--text-secondary);
-  min-width: 30px;
-  font-size: 13px;
+  min-width: 32px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .meta-value {
   color: var(--text-tertiary);
-  font-family: monospace;
-  font-size: 13px;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1px 4px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+html.dark .meta-value {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .version-info {
@@ -416,12 +503,32 @@ defineExpose({
 
 .version-text {
   margin: 0;
-  padding: 0;
+  padding: 6px 8px;
   white-space: pre-line;
   line-height: 1.4;
-  font-family: monospace;
-  font-size: 13px;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 12px;
   color: var(--text-tertiary);
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  border-left: 3px solid var(--color-primary-300);
+  transition: all 0.2s ease;
+}
+
+.version-text:hover {
+  background: var(--color-primary-50);
+  border-left-color: var(--color-primary-500);
+  transform: translateX(2px);
+}
+
+html.dark .version-text {
+  background: var(--bg-tertiary);
+  border-left-color: var(--color-primary-600);
+}
+
+html.dark .version-text:hover {
+  background: var(--color-primary-900);
+  border-left-color: var(--color-primary-400);
 }
 
 .sync-time {
@@ -471,21 +578,49 @@ defineExpose({
 
 /* 表格样式优化 */
 :deep(.ant-table-thead > tr > th) {
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+  border-bottom: 2px solid var(--color-primary-200);
   font-weight: 600;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
 }
 
 :deep(.ant-table-tbody > tr > td) {
   border-bottom: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+:deep(.ant-table-tbody > tr) {
+  transition: all 0.2s ease;
+}
+
+:deep(.ant-table-tbody > tr:hover) {
+  background: linear-gradient(135deg, var(--color-primary-25), var(--color-primary-50)) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(64, 169, 255, 0.15);
 }
 
 :deep(.ant-table-tbody > tr:hover > td) {
-  background: var(--hover-bg);
+  border-bottom-color: var(--color-primary-200);
 }
 
 :deep(.ant-table-row-selected > td) {
-  background: var(--color-primary-50);
+  background: linear-gradient(135deg, var(--color-primary-50), var(--color-primary-100)) !important;
+  border-left: 4px solid var(--color-primary-500);
+}
+
+html.dark :deep(.ant-table-thead > tr > th) {
+  background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-quaternary));
+  border-bottom-color: var(--color-primary-700);
+}
+
+html.dark :deep(.ant-table-tbody > tr:hover) {
+  background: linear-gradient(135deg, var(--color-primary-950), var(--color-primary-900)) !important;
+  box-shadow: 0 4px 12px rgba(64, 169, 255, 0.25);
+}
+
+html.dark :deep(.ant-table-row-selected > td) {
+  background: linear-gradient(135deg, var(--color-primary-900), var(--color-primary-800)) !important;
 }
 
 /* 暗色主题适配 */

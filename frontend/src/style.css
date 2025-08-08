@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Legacy样式兼容文件
+   保持向后兼容的临时样式，逐步迁移到新系统
+   ========================================================================== */
+
+/* 这个文件将逐步清空，所有样式都迁移到 src/styles/ 目录下 */
+
+/* 当前仅保留Element Plus自定义对话框的特殊样式 */
+/* 这些样式需要深度定制，暂时保留在这里 */
+
+/* 自定义确认对话框样式 */
+.custom-confirm-box {
+  border-radius: 12px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+  overflow: hidden !important;
+  min-width: 420px !important;
+  max-width: 500px !important;
+  width: auto !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+}
+
+.custom-confirm-box .el-message-box__header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
+  border: none !important;
+  padding: 12px 20px !important;
+  min-height: auto !important;
+}
+
+.custom-confirm-box .el-message-box__title {
+  font-weight: 600 !important;
+  color: white !important;
+  font-size: 16px !important;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+.custom-confirm-box .el-message-box__header::before,
+.custom-confirm-box .el-message-box__header::after {
+  display: none !important;
+}
+
+.custom-confirm-box .el-message-box__header * {
+  box-shadow: none !important;
+}
+
+.custom-confirm-box .el-message-box__header .el-message-box__status {
+  display: none !important;
+}
+
+.custom-confirm-box .el-message-box__headerbtn {
+  display: none !important;
+}
+
+.custom-confirm-box .el-message-box__headerbtn:hover {
+  color: white !important;
+}
+
+.custom-confirm-box .el-message-box__content {
+  padding: 24px !important;
+  background: white !important;
+}
+
+.custom-confirm-box .el-message-box__message {
+  font-size: 14px !important;
+  color: #4b5563 !important;
+  line-height: 1.6 !important;
+}
+
+.custom-confirm-box .el-message-box__btns {
+  padding: 20px 24px !important;
+  background: #f8fafc !important;
+  border-top: 1px solid #e5e7eb !important;
+  gap: 12px !important;
+}
+
+.custom-confirm-box .el-button {
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  padding: 10px 20px !important;
+}
+
+.custom-confirm-box .el-button--primary {
+  background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3) !important;
+}
+
+.custom-confirm-box .el-button--primary:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4) !important;
+}
+
+/* TODO: 在组件重构完成后，将这些样式迁移到组件级别 */

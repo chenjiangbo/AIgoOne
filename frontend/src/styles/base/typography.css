@@ -1,0 +1,263 @@
+/* ==========================================================================
+   基础排版样式
+   使用设计token定义的标准排版系统
+   ========================================================================== */
+
+/* 标题系统 */
+.heading-1,
+h1 {
+  font-size: var(--font-heading-1-size);
+  font-weight: var(--font-heading-1-weight);
+  line-height: var(--font-heading-1-line-height);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-4);
+}
+
+.heading-2,
+h2 {
+  font-size: var(--font-heading-2-size);
+  font-weight: var(--font-heading-2-weight);
+  line-height: var(--font-heading-2-line-height);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-3);
+}
+
+.heading-3,
+h3 {
+  font-size: var(--font-heading-3-size);
+  font-weight: var(--font-heading-3-weight);
+  line-height: var(--font-heading-3-line-height);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-3);
+}
+
+.heading-4,
+h4 {
+  font-size: var(--font-heading-4-size);
+  font-weight: var(--font-heading-4-weight);
+  line-height: var(--font-heading-4-line-height);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.heading-5,
+h5 {
+  font-size: var(--font-heading-5-size);
+  font-weight: var(--font-heading-5-weight);
+  line-height: var(--font-heading-5-line-height);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.heading-6,
+h6 {
+  font-size: var(--font-heading-6-size);
+  font-weight: var(--font-heading-6-weight);
+  line-height: var(--font-heading-6-line-height);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+/* 正文系统 */
+.text-body,
+p {
+  font-size: var(--font-body-size);
+  font-weight: var(--font-body-weight);
+  line-height: var(--font-body-line-height);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-3);
+}
+
+.text-body-large {
+  font-size: var(--font-body-large-size);
+  font-weight: var(--font-body-large-weight);
+  line-height: var(--font-body-large-line-height);
+  color: var(--color-text-primary);
+}
+
+.text-body-small {
+  font-size: var(--font-body-small-size);
+  font-weight: var(--font-body-small-weight);
+  line-height: var(--font-body-small-line-height);
+  color: var(--color-text-secondary);
+}
+
+/* 标签和辅助文本 */
+.text-label {
+  font-size: var(--font-label-size);
+  font-weight: var(--font-label-weight);
+  line-height: var(--font-label-line-height);
+  color: var(--color-text-primary);
+}
+
+.text-label-small {
+  font-size: var(--font-label-small-size);
+  font-weight: var(--font-label-small-weight);
+  line-height: var(--font-label-small-line-height);
+  color: var(--color-text-secondary);
+}
+
+.text-caption {
+  font-size: var(--font-caption-size);
+  font-weight: var(--font-caption-weight);
+  line-height: var(--font-caption-line-height);
+  color: var(--color-text-tertiary);
+}
+
+/* 代码和等宽字体 */
+.text-code,
+code,
+kbd,
+pre,
+samp {
+  font-family: var(--font-code-family);
+  font-size: var(--font-code-size);
+  font-weight: var(--font-code-weight);
+  line-height: var(--font-code-line-height);
+}
+
+code {
+  padding: var(--spacing-0_5) var(--spacing-1);
+  background-color: var(--color-neutral-100);
+  color: var(--color-text-primary);
+  border-radius: var(--border-radius-sm);
+}
+
+pre {
+  padding: var(--spacing-4);
+  background-color: var(--color-neutral-100);
+  color: var(--color-text-primary);
+  border-radius: var(--border-radius-lg);
+  overflow-x: auto;
+}
+
+pre code {
+  padding: 0;
+  background-color: transparent;
+}
+
+/* 文本颜色变体 */
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-tertiary {
+  color: var(--color-text-tertiary);
+}
+
+.text-placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.text-disabled {
+  color: var(--color-text-disabled);
+}
+
+.text-inverse {
+  color: var(--color-text-inverse);
+}
+
+/* 功能色文本 */
+.text-success {
+  color: var(--color-success-500);
+}
+
+.text-warning {
+  color: var(--color-warning-500);
+}
+
+.text-error {
+  color: var(--color-error-500);
+}
+
+.text-info {
+  color: var(--color-info-500);
+}
+
+/* 文本对齐 */
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+/* 文本装饰 */
+.text-underline {
+  text-decoration: underline;
+}
+
+.text-line-through {
+  text-decoration: line-through;
+}
+
+.text-no-underline {
+  text-decoration: none;
+}
+
+/* 文本转换 */
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.text-normal-case {
+  text-transform: none;
+}
+
+/* 文本截断 */
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 链接样式 */
+.link {
+  color: var(--color-primary-500);
+  text-decoration: underline;
+  transition: var(--transition-colors);
+}
+
+.link:hover {
+  color: var(--color-primary-600);
+}
+
+.link:focus {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* 暗色主题适配 */
+[data-theme="dark"] code {
+  background-color: var(--color-neutral-800);
+}
+
+[data-theme="dark"] pre {
+  background-color: var(--color-neutral-800);
+}

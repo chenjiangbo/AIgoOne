@@ -1,0 +1,180 @@
+// 全局CSS变量定义 - 支持亮色/暗色主题切换
+
+// ==================== 亮色主题（默认）====================
+:root {
+  // 背景色
+  --bg-primary: #ffffff;           // 主背景色
+  --bg-secondary: #f5f7fa;         // 次要背景色
+  --bg-tertiary: #fafafa;          // 第三级背景色
+  --bg-elevated: #ffffff;          // 卡片/弹窗背景色
+  --bg-hover: #f8fafc;             // 悬停背景色
+  
+  // 文字颜色
+  --text-primary: #2c3e50;         // 主要文字
+  --text-secondary: #666666;       // 次要文字
+  --text-tertiary: #909399;        // 第三级文字
+  --text-placeholder: #c0c4cc;     // 占位符文字
+  --text-inverse: #ffffff;         // 反色文字（用于深色背景）
+  
+  // 边框颜色
+  --border-light: #f0f0f0;         // 浅边框
+  --border-base: #e4e7ed;          // 基础边框
+  --border-strong: #d9d9d9;        // 强边框
+  
+  // 导航栏
+  --navbar-bg: #3b82f6;            // 导航栏背景
+  --navbar-text: #ffffff;          // 导航栏文字
+  --navbar-hover: rgba(255, 255, 255, 0.1); // 导航栏悬停
+  
+  // 侧边栏
+  --sidebar-bg: #ffffff;           // 侧边栏背景
+  --sidebar-border: #f0f0f0;       // 侧边栏边框
+  --sidebar-header-bg: #fafafa;    // 侧边栏头部背景
+  --sidebar-footer-bg: #f8fafc;    // 侧边栏底部背景
+  
+  // 阴影
+  --shadow-light: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02);
+  --shadow-base: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-strong: 0 8px 24px rgba(0, 0, 0, 0.15);
+  
+  // 状态颜色（继承Ant Design）
+  --color-primary: #3b82f6;
+  --color-primary-50: #eff6ff;
+  --color-primary-300: #93c5fd;
+  --color-primary-500: #3b82f6;
+  --color-success: #52c41a;
+  --color-success-400: #73d13d;
+  --color-success-500: #52c41a;
+  --color-warning: #faad14;
+  --color-warning-500: #faad14;
+  --color-error: #f5222d;
+  --color-error-400: #ff7875;
+  --color-error-500: #f5222d;
+  --color-info: #3b82f6;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #6b7280;
+  
+  // 边框颜色变量
+  --border-color: #e4e7ed;
+  --border-color-dark: #4b5563;
+  
+  // 悬停背景色
+  --hover-bg: #f8fafc;
+  --hover-bg-dark: #374151;
+}
+
+// ==================== 暗色主题 ====================
+html.dark {
+  // 背景色
+  --bg-primary: #1f2937;           // 主背景色
+  --bg-secondary: #111827;         // 次要背景色
+  --bg-tertiary: #374151;          // 第三级背景色
+  --bg-elevated: #1f2937;          // 卡片/弹窗背景色
+  --bg-hover: #374151;             // 悬停背景色
+  
+  // 文字颜色
+  --text-primary: #f3f4f6;         // 主要文字
+  --text-secondary: #d1d5db;       // 次要文字
+  --text-tertiary: #9ca3af;        // 第三级文字
+  --text-placeholder: #6b7280;     // 占位符文字
+  --text-inverse: #1f2937;         // 反色文字（用于亮色背景）
+  
+  // 边框颜色
+  --border-light: #374151;         // 浅边框
+  --border-base: #4b5563;          // 基础边框
+  --border-strong: #6b7280;        // 强边框
+  
+  // 导航栏（保持蓝色，但调整透明度）
+  --navbar-bg: #1e40af;            // 导航栏背景（稍深的蓝色）
+  --navbar-text: #f3f4f6;          // 导航栏文字
+  --navbar-hover: rgba(255, 255, 255, 0.15); // 导航栏悬停
+  
+  // 侧边栏
+  --sidebar-bg: #1f2937;           // 侧边栏背景
+  --sidebar-border: #374151;       // 侧边栏边框
+  --sidebar-header-bg: #111827;    // 侧边栏头部背景
+  --sidebar-footer-bg: #111827;    // 侧边栏底部背景
+  
+  // 阴影（暗色主题下的阴影更深）
+  --shadow-light: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 6px -1px rgba(0, 0, 0, 0.15);
+  --shadow-base: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-strong: 0 8px 24px rgba(0, 0, 0, 0.4);
+  
+  // 状态颜色（暗色主题下稍微调整）
+  --color-primary: #60a5fa;        // 稍亮的蓝色
+  --color-primary-50: #1e3a8a;
+  --color-primary-300: #60a5fa;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-700: #1d4ed8;
+  --color-primary-900: #1e3a8a;
+  --color-success: #34d399;        // 稍亮的绿色
+  --color-success-400: #34d399;
+  --color-success-500: #10b981;
+  --color-warning: #fbbf24;        // 稍亮的黄色
+  --color-warning-500: #f59e0b;
+  --color-error: #f87171;          // 稍亮的红色
+  --color-error-400: #f87171;
+  --color-error-500: #ef4444;
+  --color-info: #60a5fa;
+  --color-neutral-400: #6b7280;
+  --color-neutral-500: #4b5563;
+  --color-neutral-800: #1f2937;
+  
+  // 边框颜色变量
+  --border-color: #4b5563;
+  --border-color-dark: #374151;
+  
+  // 悬停背景色
+  --hover-bg: #374151;
+  --hover-bg-dark: #374151;
+}
+
+// ==================== 过渡动画 ====================
+* {
+  transition: background-color 0.3s ease, 
+              border-color 0.3s ease, 
+              color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+// 禁用某些元素的过渡动画（避免性能问题）
+img, video, iframe, canvas, svg {
+  transition: none;
+}
+
+// ==================== 工具类 ====================
+.bg-primary { background-color: var(--bg-primary) !important; }
+.bg-secondary { background-color: var(--bg-secondary) !important; }
+.bg-elevated { background-color: var(--bg-elevated) !important; }
+
+.text-primary { color: var(--text-primary) !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+.text-tertiary { color: var(--text-tertiary) !important; }
+
+.border-light { border-color: var(--border-light) !important; }
+.border-base { border-color: var(--border-base) !important; }
+
+// ==================== 主题特定的覆盖样式 ====================
+
+// 确保滚动条在暗色主题下也适配
+html.dark {
+  // Webkit滚动条样式
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 3px;
+    
+    &:hover {
+      background: var(--text-tertiary);
+    }
+  }
+}

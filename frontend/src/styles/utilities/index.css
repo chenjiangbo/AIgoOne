@@ -1,0 +1,121 @@
+/* ==========================================================================
+   工具类入口文件
+   导入所有工具类
+   ========================================================================== */
+
+/* 间距工具类 */
+@import './spacing.css';
+
+/* 布局工具类 */
+@import './layout.css';
+
+/* 其他常用工具类 */
+
+/* 显示/隐藏工具类 */
+.show { display: block !important; }
+.hide { display: none !important; }
+
+/* 可见性工具类 */
+.visible { visibility: visible !important; }
+.invisible { visibility: hidden !important; }
+
+/* 透明度工具类 */
+.opacity-0 { opacity: var(--opacity-0) !important; }
+.opacity-25 { opacity: var(--opacity-25) !important; }
+.opacity-50 { opacity: var(--opacity-50) !important; }
+.opacity-75 { opacity: var(--opacity-75) !important; }
+.opacity-100 { opacity: var(--opacity-100) !important; }
+
+/* 光标样式 */
+.cursor-auto { cursor: auto !important; }
+.cursor-default { cursor: default !important; }
+.cursor-pointer { cursor: pointer !important; }
+.cursor-wait { cursor: wait !important; }
+.cursor-text { cursor: text !important; }
+.cursor-move { cursor: move !important; }
+.cursor-not-allowed { cursor: not-allowed !important; }
+
+/* 用户选择 */
+.select-none { user-select: none !important; }
+.select-text { user-select: text !important; }
+.select-all { user-select: all !important; }
+.select-auto { user-select: auto !important; }
+
+/* 指针事件 */
+.pointer-events-none { pointer-events: none !important; }
+.pointer-events-auto { pointer-events: auto !important; }
+
+/* 白空格处理 */
+.whitespace-normal { white-space: normal !important; }
+.whitespace-nowrap { white-space: nowrap !important; }
+.whitespace-pre { white-space: pre !important; }
+.whitespace-pre-line { white-space: pre-line !important; }
+.whitespace-pre-wrap { white-space: pre-wrap !important; }
+
+/* 换行处理 */
+.break-normal { overflow-wrap: normal; word-break: normal !important; }
+.break-words { overflow-wrap: break-word !important; }
+.break-all { word-break: break-all !important; }
+
+/* 表格样式 */
+.table-auto { table-layout: auto !important; }
+.table-fixed { table-layout: fixed !important; }
+
+/* 阴影工具类 */
+.shadow-none { box-shadow: none !important; }
+.shadow-sm { box-shadow: var(--shadow-sm) !important; }
+.shadow { box-shadow: var(--shadow-md) !important; }
+.shadow-md { box-shadow: var(--shadow-md) !important; }
+.shadow-lg { box-shadow: var(--shadow-lg) !important; }
+.shadow-xl { box-shadow: var(--shadow-xl) !important; }
+.shadow-2xl { box-shadow: var(--shadow-2xl) !important; }
+
+/* 边框圆角工具类 */
+.rounded-none { border-radius: var(--border-radius-none) !important; }
+.rounded-sm { border-radius: var(--border-radius-sm) !important; }
+.rounded { border-radius: var(--border-radius-md) !important; }
+.rounded-md { border-radius: var(--border-radius-md) !important; }
+.rounded-lg { border-radius: var(--border-radius-lg) !important; }
+.rounded-xl { border-radius: var(--border-radius-xl) !important; }
+.rounded-2xl { border-radius: var(--border-radius-2xl) !important; }
+.rounded-3xl { border-radius: var(--border-radius-3xl) !important; }
+.rounded-full { border-radius: var(--border-radius-full) !important; }
+
+/* 边框工具类 */
+.border-0 { border-width: var(--border-width-0) !important; }
+.border { border-width: var(--border-width-1) !important; }
+.border-2 { border-width: var(--border-width-2) !important; }
+
+.border-t-0 { border-top-width: var(--border-width-0) !important; }
+.border-r-0 { border-right-width: var(--border-width-0) !important; }
+.border-b-0 { border-bottom-width: var(--border-width-0) !important; }
+.border-l-0 { border-left-width: var(--border-width-0) !important; }
+
+.border-t { border-top-width: var(--border-width-1) !important; }
+.border-r { border-right-width: var(--border-width-1) !important; }
+.border-b { border-bottom-width: var(--border-width-1) !important; }
+.border-l { border-left-width: var(--border-width-1) !important; }
+
+/* 边框颜色 */
+.border-primary { border-color: var(--color-border-primary) !important; }
+.border-secondary { border-color: var(--color-border-secondary) !important; }
+.border-tertiary { border-color: var(--color-border-tertiary) !important; }
+
+/* 过渡动画工具类 */
+.transition-none { transition: none !important; }
+.transition-all { transition: var(--transition-all-normal) !important; }
+.transition-colors { transition: var(--transition-colors) !important; }
+.transition-opacity { transition: var(--transition-opacity) !important; }
+.transition-transform { transition: var(--transition-transform) !important; }
+
+/* Transform 工具类 */
+.transform { transform: none !important; }
+.scale-0 { transform: scale(0) !important; }
+.scale-50 { transform: scale(.5) !important; }
+.scale-75 { transform: scale(.75) !important; }
+.scale-90 { transform: scale(.9) !important; }
+.scale-95 { transform: scale(.95) !important; }
+.scale-100 { transform: scale(1) !important; }
+.scale-105 { transform: scale(1.05) !important; }
+.scale-110 { transform: scale(1.1) !important; }
+.scale-125 { transform: scale(1.25) !important; }

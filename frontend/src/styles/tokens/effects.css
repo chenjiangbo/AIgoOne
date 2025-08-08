@@ -1,0 +1,103 @@
+/* ==========================================================================
+   视觉效果系统 - 设计Token
+   ========================================================================== */
+
+:root {
+  /* 边框圆角系统 */
+  --border-radius-none: 0;
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+  --border-radius-xl: 12px;
+  --border-radius-2xl: 16px;
+  --border-radius-3xl: 24px;
+  --border-radius-full: 9999px;
+
+  /* 边框宽度 */
+  --border-width-0: 0;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-4: 4px;
+  --border-width-8: 8px;
+
+  /* 阴影系统 */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+
+  /* 特殊阴影 */
+  --shadow-focus: 0 0 0 3px rgba(64, 158, 255, 0.2);
+  --shadow-error: 0 0 0 3px rgba(245, 108, 108, 0.2);
+  --shadow-success: 0 0 0 3px rgba(103, 194, 58, 0.2);
+  --shadow-warning: 0 0 0 3px rgba(230, 162, 60, 0.2);
+
+  /* 过渡动画 */
+  --transition-duration-fast: 150ms;
+  --transition-duration-normal: 250ms;
+  --transition-duration-slow: 350ms;
+  --transition-duration-slower: 500ms;
+
+  --transition-timing-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --transition-timing-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --transition-timing-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-timing-linear: linear;
+
+  /* 常用过渡组合 */
+  --transition-all-fast: all var(--transition-duration-fast) var(--transition-timing-ease-out);
+  --transition-all-normal: all var(--transition-duration-normal) var(--transition-timing-ease-out);
+  --transition-colors: color var(--transition-duration-fast) var(--transition-timing-ease-out),
+                      background-color var(--transition-duration-fast) var(--transition-timing-ease-out),
+                      border-color var(--transition-duration-fast) var(--transition-timing-ease-out);
+  --transition-opacity: opacity var(--transition-duration-fast) var(--transition-timing-ease-out);
+  --transition-transform: transform var(--transition-duration-normal) var(--transition-timing-ease-out);
+
+  /* 透明度系统 */
+  --opacity-0: 0;
+  --opacity-5: 0.05;
+  --opacity-10: 0.1;
+  --opacity-20: 0.2;
+  --opacity-25: 0.25;
+  --opacity-30: 0.3;
+  --opacity-40: 0.4;
+  --opacity-50: 0.5;
+  --opacity-60: 0.6;
+  --opacity-70: 0.7;
+  --opacity-75: 0.75;
+  --opacity-80: 0.8;
+  --opacity-90: 0.9;
+  --opacity-95: 0.95;
+  --opacity-100: 1;
+
+  /* Z-index 层级系统 */
+  --z-index-hide: -1;
+  --z-index-auto: auto;
+  --z-index-base: 0;
+  --z-index-docked: 10;
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1100;
+  --z-index-banner: 1200;
+  --z-index-overlay: 1300;
+  --z-index-modal: 1400;
+  --z-index-popover: 1500;
+  --z-index-skiplink: 1600;
+  --z-index-toast: 1700;
+  --z-index-tooltip: 1800;
+
+  /* 模糊效果 */
+  --backdrop-blur-none: 0;
+  --backdrop-blur-sm: 4px;
+  --backdrop-blur-md: 8px;
+  --backdrop-blur-lg: 16px;
+  --backdrop-blur-xl: 24px;
+
+  /* 组件特定效果 */
+  --button-shadow-hover: var(--shadow-md);
+  --card-shadow: var(--shadow-sm);
+  --dialog-shadow: var(--shadow-2xl);
+  --dropdown-shadow: var(--shadow-lg);
+  --input-shadow-focus: var(--shadow-focus);
+}

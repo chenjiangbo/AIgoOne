@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(npm install:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(npm run dev:*)",
+      "Bash(python -m venv:*)",
+      "Bash(.venvScriptsactivate)",
+      "Bash(pip install:*)",
+      "Bash(.venv/Scripts/activate)",
+      "Bash(python:*)",
+      "WebFetch(domain:tunnel.desauto.cn)",
+      "Bash(curl:*)",
+      "Bash(taskkill:*)",
+      "Bash(sqlite3:*)",
+      "Bash(D:devai_managerbackendvenvScriptspython.exe:*)",
+      "Bash(D:devai_managerbackendvenvScriptsuvicorn.exe:*)",
+      "Bash(..venvScriptsactivate:*)",
+      "Bash(cp:*)",
+      "Bash(.venv/Scripts/python.exe:*)",
+      "Bash(npm create:*)",
+      "Bash(rm:*)",
+      "Bash(npm run build:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": []
+  }
+}

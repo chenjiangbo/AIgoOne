@@ -1,0 +1,71 @@
+/* 全局对话框样式优化 */
+
+/* Element Plus 对话框样式覆盖 */
+:deep(.el-dialog) {
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+}
+
+:deep(.el-dialog__header) {
+  padding: var(--spacing-4);
+  margin: calc(var(--spacing-5) * -1) calc(var(--spacing-5) * -1) 0;
+  background: var(--color-primary-500);
+  color: white;
+  border-bottom: 1px solid var(--color-border-secondary);
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+:deep(.el-dialog__title) {
+  color: white;
+  font-weight: var(--font-weight-semibold);
+}
+
+:deep(.el-dialog__headerbtn) {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+:deep(.el-dialog__headerbtn:hover) {
+  background: var(--color-error-500);
+  color: white;
+}
+
+:deep(.el-dialog__close) {
+  color: inherit;
+}
+
+:deep(.el-dialog__body) {
+  padding: var(--spacing-5);
+}
+
+:deep(.el-dialog__footer) {
+  padding: var(--spacing-4) var(--spacing-5);
+  margin: 0 calc(var(--spacing-5) * -1) calc(var(--spacing-5) * -1);
+  border-top: 1px solid var(--color-border-primary);
+  border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+}
+
+/* 暗色主题适配 */
+[data-theme="dark"] :deep(.el-dialog__header) {
+  background: var(--color-neutral-800);
+}
+
+[data-theme="dark"] :deep(.el-dialog__body),
+[data-theme="dark"] :deep(.el-dialog__footer) {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border-secondary);
+}
+
+/* 特殊对话框类型 */
+.batch-sync-dialog :deep(.el-dialog__header) {
+  background: var(--color-info-500);
+}
+
+[data-theme="dark"] .batch-sync-dialog :deep(.el-dialog__header) {
+  background: var(--color-info-600);
+}

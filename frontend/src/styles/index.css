@@ -1,0 +1,374 @@
+/* ==========================================================================
+   AI Manager 前端样式系统
+   基于设计Token的模块化CSS架构
+   ========================================================================== */
+
+/* 1. 设计Token - 设计系统的基础 */
+@import './tokens/index.css';
+
+/* 2. 基础样式 - CSS重置、排版等基础样式 */
+@import './base/index.css';
+
+/* 3. 工具类 - 快速样式应用的工具类 */
+@import './utilities/index.css';
+
+/* 4. 组件样式 */
+@import './components/index.css';
+
+/* 5. 布局样式 - 将在后续阶段添加 */  
+/* @import './layouts/index.css'; */
+
+/* 6. Element Plus 组件层级和定位修复 */
+.el-message {
+  z-index: 9999 !important;
+  position: fixed !important;
+  top: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  min-width: 160px;
+  max-width: 400px;
+  width: auto;
+  padding: 10px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid;
+  display: flex !important;
+  align-items: center !important;
+  flex-direction: row !important;
+  gap: 8px;
+}
+
+.el-message__icon {
+  margin: 0 !important;
+  font-size: 16px !important;
+  flex-shrink: 0;
+}
+
+.el-message__content {
+  margin: 0 !important;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+/* 成功消息样式 */
+.el-message--success {
+  background: linear-gradient(135deg, #f0f9e8 0%, #e8f5e8 100%);
+  border-color: #52c41a;
+  color: #389e0d;
+}
+
+.el-message--success .el-message__icon {
+  color: #52c41a;
+}
+
+/* 错误消息样式 */
+.el-message--error {
+  background: linear-gradient(135deg, #fff2f0 0%, #ffece6 100%);
+  border-color: #ff4d4f;
+  color: #cf1322;
+}
+
+.el-message--error .el-message__icon {
+  color: #ff4d4f;
+}
+
+/* 警告消息样式 */
+.el-message--warning {
+  background: linear-gradient(135deg, #fffbe6 0%, #fff7e6 100%);
+  border-color: #faad14;
+  color: #d46b08;
+}
+
+.el-message--warning .el-message__icon {
+  color: #faad14;
+}
+
+/* 信息消息样式 */
+.el-message--info {
+  background: linear-gradient(135deg, #f6ffed 0%, #e6f7ff 100%);
+  border-color: #1890ff;
+  color: #0958d9;
+}
+
+.el-message--info .el-message__icon {
+  color: #1890ff;
+}
+
+/* 隐藏关闭按钮 */
+.el-message__closeBtn {
+  display: none !important;
+}
+
+.el-message-box {
+  z-index: 10000 !important;
+}
+
+.el-loading-mask {
+  z-index: 9998 !important;
+}
+
+.el-dialog {
+  z-index: 9997 !important;
+}
+
+.el-drawer {
+  z-index: 9996 !important;
+}
+
+/* 业务树对话框特殊处理 */
+.business-tree-dialog .el-dialog {
+  z-index: 9997 !important;
+}
+
+/* 修复业务树对话框内的消息弹窗 */
+.el-message-box {
+  z-index: 10001 !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: auto !important;
+  min-width: 300px !important;
+  max-width: 500px !important;
+}
+
+/* 修复所有确认对话框样式 */
+.el-message-box {
+  border-radius: 8px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  background: #ffffff !important;
+  border: 1px solid #e4e7ed !important;
+}
+
+.el-message-box__header {
+  padding: 20px 20px 10px !important;
+  background: #f8f9fa !important;
+  border-bottom: 1px solid #e9ecef !important;
+  border-radius: 8px 8px 0 0 !important;
+  position: relative !important;
+}
+
+.el-message-box__title {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #303133 !important;
+}
+
+.el-message-box__headerbtn {
+  position: absolute !important;
+  top: 15px !important;
+  right: 15px !important;
+  font-size: 18px !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: none !important;
+  color: #666 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  z-index: 1 !important;
+}
+
+.el-message-box__headerbtn:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+  color: #333 !important;
+}
+
+.el-message-box__content {
+  padding: 20px !important;
+  background: #ffffff !important;
+}
+
+.el-message-box__btns {
+  padding: 15px 20px 20px !important;
+  background: #f8f9fa !important;
+  border-top: 1px solid #e9ecef !important;
+  border-radius: 0 0 8px 8px !important;
+}
+
+/* 业务树弹窗样式优化 */
+.business-tree-prompt.el-message-box {
+  border-radius: 8px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  background: #ffffff !important;
+  border: 1px solid #e4e7ed !important;
+}
+
+.business-tree-prompt .el-message-box__header {
+  padding: 20px 20px 10px !important;
+  background: #f8f9fa !important;
+  border-bottom: 1px solid #e9ecef !important;
+  border-radius: 8px 8px 0 0 !important;
+  position: relative !important;
+}
+
+.business-tree-prompt .el-message-box__title {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #303133 !important;
+}
+
+.business-tree-prompt .el-message-box__headerbtn {
+  position: absolute !important;
+  top: 15px !important;
+  right: 15px !important;
+  font-size: 18px !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: none !important;
+  color: #666 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  z-index: 1 !important;
+}
+
+.business-tree-prompt .el-message-box__headerbtn:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+  color: #333 !important;
+}
+
+.business-tree-prompt .el-message-box__content {
+  padding: 20px !important;
+  background: #ffffff !important;
+}
+
+.business-tree-prompt .el-message-box__btns {
+  padding: 15px 20px 20px !important;
+  background: #f8f9fa !important;
+  border-top: 1px solid #e9ecef !important;
+  border-radius: 0 0 8px 8px !important;
+}
+
+/* 确保根元素和body正确设置 */
+html, body {
+  position: relative;
+  overflow-x: hidden;
+}
+
+#app {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* 6. 主题样式 - 将在后续阶段添加 */
+/* @import './themes/index.css'; */
+
+/* ==========================================================================
+   临时兼容性样式
+   在重构过程中保持现有功能正常运行的临时样式
+   ========================================================================== */
+
+/* Element Plus 组件样式覆盖 */
+.el-button {
+  transition: var(--transition-all-fast);
+}
+
+.el-button:hover {
+  transform: translateY(-1px);
+}
+
+.el-card {
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-all-fast);
+}
+
+.el-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.el-dialog {
+  border-radius: var(--border-radius-xl);
+  overflow: hidden;
+}
+
+.el-drawer {
+  border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg);
+}
+
+/* 表单元素样式 */
+.el-input__wrapper {
+  border-radius: var(--border-radius-md);
+  transition: var(--transition-all-fast);
+}
+
+.el-input__wrapper:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.el-input__wrapper.is-focus {
+  box-shadow: var(--shadow-focus);
+}
+
+/* 表格样式优化 */
+.el-table {
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+}
+
+.el-table th {
+  background-color: var(--color-neutral-50);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-theme="dark"] .el-table th {
+  background-color: var(--color-neutral-800);
+}
+
+/* 标签样式 */
+.el-tag {
+  border-radius: var(--border-radius-md);
+  font-weight: var(--font-weight-medium);
+}
+
+/* 加载状态 */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-bg-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-index-overlay);
+}
+
+/* 错误状态 */
+.error-state {
+  text-align: center;
+  padding: var(--spacing-8);
+  color: var(--color-text-secondary);
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-12);
+  color: var(--color-text-tertiary);
+}
+
+/* 响应式断点辅助类 */
+@media (max-width: 640px) {
+  .sm\:hidden { display: none !important; }
+}
+
+@media (max-width: 768px) {
+  .md\:hidden { display: none !important; }
+}
+
+@media (max-width: 1024px) {
+  .lg\:hidden { display: none !important; }
+}

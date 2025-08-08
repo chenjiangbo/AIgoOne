@@ -1,0 +1,114 @@
+/* ==========================================================================
+   字体系统 - 设计Token
+   ========================================================================== */
+
+:root {
+  /* 字体族 */
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+                       'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 
+                       'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 
+                       'Noto Color Emoji';
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Cascadia Code', 
+                       'Roboto Mono', Consolas, 'Courier New', monospace;
+  --font-family-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+
+  /* 字体大小系统 */
+  --font-size-xs: 12px;       /* 0.75rem */
+  --font-size-sm: 13px;       /* 0.8125rem */
+  --font-size-base: 14px;     /* 0.875rem */
+  --font-size-md: 15px;       /* 0.9375rem */
+  --font-size-lg: 16px;       /* 1rem */
+  --font-size-xl: 18px;       /* 1.125rem */
+  --font-size-2xl: 20px;      /* 1.25rem */
+  --font-size-3xl: 24px;      /* 1.5rem */
+  --font-size-4xl: 28px;      /* 1.75rem */
+  --font-size-5xl: 32px;      /* 2rem */
+  --font-size-6xl: 36px;      /* 2.25rem */
+  --font-size-7xl: 40px;      /* 2.5rem */
+
+  /* 字体粗细 */
+  --font-weight-thin: 100;
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  /* 行高系统 */
+  --line-height-none: 1;
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+
+  /* 字母间距 */
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+
+  /* 语义化字体样式 */
+  /* 标题系统 */
+  --font-heading-1-size: var(--font-size-5xl);
+  --font-heading-1-weight: var(--font-weight-bold);
+  --font-heading-1-line-height: var(--line-height-tight);
+
+  --font-heading-2-size: var(--font-size-4xl);
+  --font-heading-2-weight: var(--font-weight-semibold);
+  --font-heading-2-line-height: var(--line-height-tight);
+
+  --font-heading-3-size: var(--font-size-3xl);
+  --font-heading-3-weight: var(--font-weight-semibold);
+  --font-heading-3-line-height: var(--line-height-snug);
+
+  --font-heading-4-size: var(--font-size-2xl);
+  --font-heading-4-weight: var(--font-weight-medium);
+  --font-heading-4-line-height: var(--line-height-snug);
+
+  --font-heading-5-size: var(--font-size-xl);
+  --font-heading-5-weight: var(--font-weight-medium);
+  --font-heading-5-line-height: var(--line-height-normal);
+
+  --font-heading-6-size: var(--font-size-lg);
+  --font-heading-6-weight: var(--font-weight-medium);
+  --font-heading-6-line-height: var(--line-height-normal);
+
+  /* 正文系统 */
+  --font-body-size: var(--font-size-base);
+  --font-body-weight: var(--font-weight-normal);
+  --font-body-line-height: var(--line-height-normal);
+
+  --font-body-large-size: var(--font-size-lg);
+  --font-body-large-weight: var(--font-weight-normal);
+  --font-body-large-line-height: var(--line-height-normal);
+
+  --font-body-small-size: var(--font-size-sm);
+  --font-body-small-weight: var(--font-weight-normal);
+  --font-body-small-line-height: var(--line-height-normal);
+
+  /* 标签系统 */
+  --font-label-size: var(--font-size-base);
+  --font-label-weight: var(--font-weight-medium);
+  --font-label-line-height: var(--line-height-normal);
+
+  --font-label-small-size: var(--font-size-sm);
+  --font-label-small-weight: var(--font-weight-medium);
+  --font-label-small-line-height: var(--line-height-normal);
+
+  /* 代码系统 */
+  --font-code-size: var(--font-size-sm);
+  --font-code-weight: var(--font-weight-normal);
+  --font-code-line-height: var(--line-height-normal);
+  --font-code-family: var(--font-family-mono);
+
+  /* 描述文本 */
+  --font-caption-size: var(--font-size-xs);
+  --font-caption-weight: var(--font-weight-normal);
+  --font-caption-line-height: var(--line-height-normal);
+}

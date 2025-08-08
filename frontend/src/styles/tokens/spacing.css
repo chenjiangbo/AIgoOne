@@ -1,0 +1,52 @@
+/* ==========================================================================
+   间距系统 - 设计Token
+   ========================================================================== */
+
+:root {
+  /* 间距系统 - 基于4px基础单位 */
+  --spacing-0: 0;
+  --spacing-0_5: 2px;   /* 0.5 * 4px */
+  --spacing-1: 4px;     /* 1 * 4px */
+  --spacing-1_5: 6px;   /* 1.5 * 4px */
+  --spacing-2: 8px;     /* 2 * 4px */
+  --spacing-2_5: 10px;  /* 2.5 * 4px */
+  --spacing-3: 12px;    /* 3 * 4px */
+  --spacing-3_5: 14px;  /* 3.5 * 4px */
+  --spacing-4: 16px;    /* 4 * 4px */
+  --spacing-5: 20px;    /* 5 * 4px */
+  --spacing-6: 24px;    /* 6 * 4px */
+  --spacing-7: 28px;    /* 7 * 4px */
+  --spacing-8: 32px;    /* 8 * 4px */
+  --spacing-9: 36px;    /* 9 * 4px */
+  --spacing-10: 40px;   /* 10 * 4px */
+  --spacing-11: 44px;   /* 11 * 4px */
+  --spacing-12: 48px;   /* 12 * 4px */
+  --spacing-14: 56px;   /* 14 * 4px */
+  --spacing-16: 64px;   /* 16 * 4px */
+  --spacing-18: 72px;   /* 18 * 4px */
+  --spacing-20: 80px;   /* 20 * 4px */
+  --spacing-24: 96px;   /* 24 * 4px */
+
+  /* 语义化间距 */
+  --spacing-xs: var(--spacing-1);      /* 4px */
+  --spacing-sm: var(--spacing-2);      /* 8px */
+  --spacing-md: var(--spacing-4);      /* 16px */
+  --spacing-lg: var(--spacing-6);      /* 24px */
+  --spacing-xl: var(--spacing-8);      /* 32px */
+  --spacing-2xl: var(--spacing-12);    /* 48px */
+  --spacing-3xl: var(--spacing-16);    /* 64px */
+
+  /* 组件内间距 */
+  --spacing-component-xs: var(--spacing-2);   /* 8px */
+  --spacing-component-sm: var(--spacing-3);   /* 12px */
+  --spacing-component-md: var(--spacing-4);   /* 16px */
+  --spacing-component-lg: var(--spacing-5);   /* 20px */
+  --spacing-component-xl: var(--spacing-6);   /* 24px */
+
+  /* 布局间距 */
+  --spacing-layout-xs: var(--spacing-4);      /* 16px */
+  --spacing-layout-sm: var(--spacing-6);      /* 24px */
+  --spacing-layout-md: var(--spacing-8);      /* 32px */
+  --spacing-layout-lg: var(--spacing-12);     /* 48px */
+  --spacing-layout-xl: var(--spacing-16);     /* 64px */
+}

@@ -17,8 +17,15 @@
           <div class="device-name">
             {{ record.name || '未命名设备' }}
           </div>
-          <div class="device-url">
-            {{ record.api_base_url }}
+          <div class="device-meta">
+            <div class="meta-item">
+              <span class="meta-label">地址:</span>
+              <span class="meta-value">{{ truncateUrl(record.api_base_url) }}</span>
+            </div>
+            <div class="meta-item" v-if="record.device_sn">
+              <span class="meta-label">SN:</span>
+              <span class="meta-value">{{ record.device_sn }}</span>
+            </div>
           </div>
         </div>
       </template>
@@ -33,9 +40,9 @@
 
       <!-- 软件版本列 -->
       <template #version="{ record }">
-        <a-tooltip v-if="record.version" :title="record.version">
-          <span class="version-text">{{ formatVersion(record.version) }}</span>
-        </a-tooltip>
+        <div v-if="record.version" class="version-info">
+          <pre class="version-text">{{ formatVersion(record.version) }}</pre>
+        </div>
         <span v-else class="text-secondary">-</span>
       </template>
 
@@ -259,15 +266,31 @@ const getStatusText = (status: string) => {
   }
 }
 
-// 格式化版本信息
+// 格式化版本信息 - 参考原前端实现
 const formatVersion = (version: string) => {
   if (!version) return '-'
   try {
-    const versionObj = JSON.parse(version)
-    return versionObj.version || versionObj.app_version || '未知版本'
-  } catch {
-    return version.length > 20 ? version.substring(0, 20) + '...' : version
+    const parsed = JSON.parse(version);
+    const versions = [];
+    if (parsed.Engine) {
+      versions.push(`Engine: ${parsed.Engine}`);
+    }
+    if (parsed.Inflet) {
+      versions.push(`Inflet: ${parsed.Inflet}`);
+    }
+    if (parsed.Web) {
+      versions.push(`Web: ${parsed.Web}`);
+    }
+    return versions.join('\n') || '-';
+  } catch (e) {
+    return version.split('\n')[0] || version
   }
+}
+
+// 截断URL显示
+const truncateUrl = (url: string) => {
+  if (!url) return '-'
+  return url.length > 35 ? url.substring(0, 35) + '...' : url
 }
 
 // 格式化时间
@@ -292,25 +315,61 @@ defineExpose({
 <style scoped>
 .device-table-container {
   flex: 1;
-  padding: 0 24px 24px;
+  padding: 24px 24px 24px;
   background: var(--bg-primary);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .device-table {
+  flex: 1;
+}
+
+:deep(.ant-table) {
   height: 100%;
+}
+
+:deep(.ant-table-tbody) {
+  min-height: 200px;
+}
+
+.device-info {
+  padding: 4px 0;
 }
 
 .device-info .device-name {
   font-weight: 500;
   color: var(--text-primary);
-  margin-bottom: 2px;
+  margin-bottom: 8px;
 }
 
-.device-info .device-url {
+.device-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   font-size: 12px;
+}
+
+.meta-label {
   color: var(--text-secondary);
+  min-width: 30px;
+}
+
+.meta-value {
+  color: var(--text-tertiary);
   font-family: monospace;
+}
+
+.version-info {
+  font-family: monospace;
+  font-size: 12px;
 }
 
 .status-cell {
@@ -337,8 +396,13 @@ defineExpose({
 }
 
 .version-text {
+  margin: 0;
+  padding: 0;
+  white-space: pre-line;
+  line-height: 1.4;
   font-family: monospace;
-  font-size: 13px;
+  font-size: 12px;
+  color: var(--text-tertiary);
 }
 
 .sync-time {

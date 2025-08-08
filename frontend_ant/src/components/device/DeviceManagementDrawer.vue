@@ -3,7 +3,7 @@
     v-model:open="visible"
     title="设备管理"
     placement="right"
-    :width="1200"
+    :width="'70%'"
     :closable="false"
     :mask-closable="false"
     class="device-management-drawer"

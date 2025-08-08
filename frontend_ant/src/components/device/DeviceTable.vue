@@ -32,7 +32,7 @@
 
       <!-- 设备类型列 -->
       <template #deviceType="{ record }">
-        <a-tag v-if="record.device_type" color="blue">
+        <a-tag v-if="record.device_type" color="blue" class="device-type-tag">
           {{ record.device_type }}
         </a-tag>
         <span v-else class="text-secondary">-</span>
@@ -52,6 +52,7 @@
           <a-badge
             :status="getStatusBadge(record.status)"
             :text="getStatusText(record.status)"
+            class="status-badge"
           />
           <LoadingOutlined v-if="(record as any).syncing" class="sync-loading" />
         </div>
@@ -167,7 +168,7 @@ const columns: TableColumnsType = [
     title: '设备信息',
     dataIndex: 'deviceInfo',
     key: 'deviceInfo',
-    width: 250,
+    width: 170,  // 从190再缩小到170
     ellipsis: true,
     slots: { customRender: 'deviceInfo' }
   },
@@ -175,7 +176,7 @@ const columns: TableColumnsType = [
     title: '设备类型',
     dataIndex: 'device_type',
     key: 'device_type',
-    width: 120,
+    width: 110,  // 从120缩小到110
     align: 'center',
     slots: { customRender: 'deviceType' }
   },
@@ -183,7 +184,7 @@ const columns: TableColumnsType = [
     title: '软件版本',
     dataIndex: 'version',
     key: 'version',
-    width: 220,
+    width: 360,  // 从320增大到360
     ellipsis: true,
     slots: { customRender: 'version' }
   },
@@ -191,7 +192,7 @@ const columns: TableColumnsType = [
     title: '状态',
     dataIndex: 'status',
     key: 'status',
-    width: 120,
+    width: 100,  // 从120缩小到100
     align: 'center',
     slots: { customRender: 'status' }
   },
@@ -199,13 +200,13 @@ const columns: TableColumnsType = [
     title: '最后同步',
     dataIndex: 'last_sync_at',
     key: 'last_sync_at',
-    width: 140,
+    width: 120,  // 从130再缩小到120
     slots: { customRender: 'lastSync' }
   },
   {
     title: '操作',
     key: 'action',
-    width: 180,
+    width: 190,
     fixed: 'right',
     align: 'center',
     slots: { customRender: 'action' }
@@ -503,11 +504,11 @@ html.dark .meta-value {
 
 .version-text {
   margin: 0;
-  padding: 6px 8px;
+  padding: 8px 10px;  /* 增加padding */
   white-space: pre-line;
-  line-height: 1.4;
+  line-height: 1.5;   /* 增加行高 */
   font-family: 'JetBrains Mono', 'Consolas', monospace;
-  font-size: 12px;
+  font-size: 13px;    /* 从12px增大到13px */
   color: var(--text-tertiary);
   background: var(--bg-secondary);
   border-radius: 6px;
@@ -532,12 +533,28 @@ html.dark .version-text:hover {
 }
 
 .sync-time {
-  font-size: 13px;
+  font-size: 14px;  /* 从13px增大到14px */
   color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .text-secondary {
   color: var(--text-secondary);
+}
+
+/* 设备类型标签样式 */
+.device-type-tag {
+  font-size: 13px !important;
+  font-weight: 500;
+  padding: 4px 12px !important;
+  border-radius: 6px !important;
+}
+
+/* 状态徽章样式 */
+.status-badge :deep(.ant-badge-status-text) {
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 8px;
 }
 
 /* 操作按钮样式 */
@@ -555,16 +572,109 @@ html.dark .version-text:hover {
 }
 
 .action-btn {
-  font-size: 12px;
-  height: 28px;
-  padding: 0 8px;
+  font-size: 13px;  /* 从12px增大到13px */
+  height: 32px;     /* 从28px增大到32px */
+  padding: 0 10px;  /* 从8px增大到10px */
   border-radius: 4px;
   transition: all 0.2s ease;
 }
 
+.action-btn .anticon {
+  font-size: 15px;  /* 图标大小增大到15px */
+}
+
+.action-btn {
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+html.dark .action-btn {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .action-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--color-primary-300);
+}
+
+/* 不同操作按钮的彩色样式 */
+.action-btn:nth-child(1) .anticon {
+  /* 同步按钮图标 - 蓝色 */
+  color: var(--color-primary-500);
+}
+
+.action-btn:nth-child(1):hover {
+  background: var(--color-primary-50);
+  border-color: var(--color-primary-300);
+}
+
+.action-btn:nth-child(1):hover .anticon {
+  color: var(--color-primary-600);
+}
+
+.action-btn:nth-child(2) .anticon {
+  /* 编辑按钮图标 - 橙色 */
+  color: var(--color-warning-500);
+}
+
+.action-btn:nth-child(2):hover {
+  background: var(--color-warning-50);
+  border-color: var(--color-warning-300);
+}
+
+.action-btn:nth-child(2):hover .anticon {
+  color: var(--color-warning-600);
+}
+
+.action-row:nth-child(2) .action-btn:nth-child(1) .anticon {
+  /* 详情按钮图标 - 绿色 */
+  color: var(--color-success-500);
+}
+
+.action-row:nth-child(2) .action-btn:nth-child(1):hover {
+  background: var(--color-success-50);
+  border-color: var(--color-success-300);
+}
+
+.action-row:nth-child(2) .action-btn:nth-child(1):hover .anticon {
+  color: var(--color-success-600);
+}
+
+.action-row:nth-child(2) .action-btn:nth-child(2) .anticon {
+  /* 删除按钮图标 - 红色 */
+  color: var(--color-error-500);
+}
+
+.action-row:nth-child(2) .action-btn:nth-child(2):hover {
+  background: var(--color-error-50);
+  border-color: var(--color-error-300);
+}
+
+.action-row:nth-child(2) .action-btn:nth-child(2):hover .anticon {
+  color: var(--color-error-600);
+}
+
+/* 暗色主题下的操作按钮 */
+html.dark .action-btn:nth-child(1):hover {
+  background: var(--color-primary-900);
+  border-color: var(--color-primary-700);
+}
+
+html.dark .action-btn:nth-child(2):hover {
+  background: var(--color-warning-900);
+  border-color: var(--color-warning-700);
+}
+
+html.dark .action-row:nth-child(2) .action-btn:nth-child(1):hover {
+  background: var(--color-success-900);
+  border-color: var(--color-success-700);
+}
+
+html.dark .action-row:nth-child(2) .action-btn:nth-child(2):hover {
+  background: var(--color-error-900);
+  border-color: var(--color-error-700);
 }
 
 @keyframes highlight {

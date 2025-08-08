@@ -4,8 +4,8 @@
     title="设备管理"
     placement="right"
     :width="'70%'"
-    :closable="false"
-    :mask-closable="false"
+    :closable="true"
+    :mask-closable="true"
     class="device-management-drawer"
   >
     <template #title>

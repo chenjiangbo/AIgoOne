@@ -6,7 +6,7 @@
       :loading="loading"
       :pagination="paginationConfig"
       :row-selection="rowSelection"
-      :scroll="{ y: tableHeight }"
+      :scroll="{ y: tableHeight, x: 'max-content' }"
       size="middle"
       class="device-table"
       row-key="id"
@@ -67,53 +67,61 @@
 
       <!-- 操作列 -->
       <template #action="{ record }">
-        <a-space>
-          <a-button
-            type="text"
-            size="small"
-            :loading="(record as any).syncing"
-            @click="$emit('sync', record)"
-          >
-            <template #icon>
-              <SyncOutlined />
-            </template>
-            同步
-          </a-button>
+        <div class="action-buttons">
+          <div class="action-row">
+            <a-button
+              type="text"
+              size="small"
+              :loading="(record as any).syncing"
+              @click="$emit('sync', record)"
+              class="action-btn"
+            >
+              <template #icon>
+                <SyncOutlined />
+              </template>
+              同步
+            </a-button>
 
-          <a-button
-            type="text"
-            size="small"
-            @click="$emit('edit', record)"
-          >
-            <template #icon>
-              <EditOutlined />
-            </template>
-            编辑
-          </a-button>
+            <a-button
+              type="text"
+              size="small"
+              @click="$emit('edit', record)"
+              class="action-btn"
+            >
+              <template #icon>
+                <EditOutlined />
+              </template>
+              编辑
+            </a-button>
+          </div>
+          
+          <div class="action-row">
+            <a-button
+              type="text"
+              size="small"
+              @click="$emit('view-details', record)"
+              class="action-btn"
+            >
+              <template #icon>
+                <EyeOutlined />
+              </template>
+              详情
+            </a-button>
 
-          <a-button
-            type="text"
-            size="small"
-            @click="$emit('view-details', record)"
-          >
-            <template #icon>
-              <EyeOutlined />
-            </template>
-            详情
-          </a-button>
-
-          <a-button
-            type="text"
-            size="small"
-            danger
-            @click="$emit('delete', record)"
-          >
-            <template #icon>
-              <DeleteOutlined />
-            </template>
-            删除
-          </a-button>
-        </a-space>
+            <a-button
+              type="text"
+              size="small"
+              danger
+              @click="$emit('delete', record)"
+              class="action-btn"
+            >
+              <template #icon>
+                <DeleteOutlined />
+              </template>
+              删除
+            </a-button>
+          </div>
+        </div>
       </template>
     </a-table>
   </div>
@@ -175,7 +183,7 @@ const columns: TableColumnsType = [
     title: '软件版本',
     dataIndex: 'version',
     key: 'version',
-    width: 150,
+    width: 220,
     ellipsis: true,
     slots: { customRender: 'version' }
   },
@@ -188,16 +196,16 @@ const columns: TableColumnsType = [
     slots: { customRender: 'status' }
   },
   {
-    title: '最后同步时间',
+    title: '最后同步',
     dataIndex: 'last_sync_at',
     key: 'last_sync_at',
-    width: 180,
+    width: 140,
     slots: { customRender: 'lastSync' }
   },
   {
     title: '操作',
     key: 'action',
-    width: 280,
+    width: 180,
     fixed: 'right',
     align: 'center',
     slots: { customRender: 'action' }
@@ -227,9 +235,9 @@ const paginationConfig = computed(() => ({
   pageSizeOptions: ['10', '20', '50', '100']
 }))
 
-// 表格高度
+// 表格高度 - 自动计算，确保充满容器
 const tableHeight = computed(() => {
-  return Math.max(props.height - 100, 300) // 减去表头和分页的高度
+  return 'calc(70vh - 200px)' // 70%视口高度减去头部和工具栏
 })
 
 // 清除选择
@@ -326,8 +334,16 @@ defineExpose({
   flex: 1;
 }
 
+:deep(.ant-table-wrapper) {
+  height: 100%;
+}
+
 :deep(.ant-table) {
   height: 100%;
+}
+
+:deep(.ant-table-container) {
+  height: calc(100% - 60px); /* 减去分页组件的高度 */
 }
 
 :deep(.ant-table-tbody) {
@@ -339,37 +355,40 @@ defineExpose({
 }
 
 .device-info .device-name {
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  font-size: 14px;
 }
 
 .device-meta {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .meta-item {
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .meta-label {
   color: var(--text-secondary);
   min-width: 30px;
+  font-size: 13px;
 }
 
 .meta-value {
   color: var(--text-tertiary);
   font-family: monospace;
+  font-size: 13px;
 }
 
 .version-info {
   font-family: monospace;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .status-cell {
@@ -401,7 +420,7 @@ defineExpose({
   white-space: pre-line;
   line-height: 1.4;
   font-family: monospace;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-tertiary);
 }
 
@@ -412,6 +431,33 @@ defineExpose({
 
 .text-secondary {
   color: var(--text-secondary);
+}
+
+/* 操作按钮样式 */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.action-row {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.action-btn {
+  font-size: 12px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes highlight {

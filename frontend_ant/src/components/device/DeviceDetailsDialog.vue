@@ -4,6 +4,7 @@
     title="设备详情"
     width="800px"
     :footer="null"
+    :draggable="true"
     class="device-details-modal"
   >
     <div v-if="device" class="device-details-content">

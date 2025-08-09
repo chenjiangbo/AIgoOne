@@ -4,6 +4,7 @@
     title="添加设备"
     :confirm-loading="loading"
     :mask-closable="false"
+    :draggable="true"
     @ok="handleSubmit"
     @cancel="handleCancel"
   >
@@ -14,27 +15,14 @@
       layout="vertical"
       class="add-device-form"
     >
-      <a-form-item
-        label="设备别名"
-        name="name"
-        help="用于在AIgoOne中识别此设备的友好名称"
-      >
-        <a-input
-          v-model:value="formData.name"
-          placeholder="请输入设备别名，如：停车场A算力设备"
-          :maxlength="100"
-          show-count
-        />
-      </a-form-item>
 
       <a-form-item
         label="设备地址"
         name="api_base_url"
-        help="算法应用平台的访问地址，格式：http://ip:port"
       >
         <a-input
           v-model:value="formData.api_base_url"
-          placeholder="http://192.168.1.100:8000"
+          placeholder="算法应用平台的访问地址，格式：http://192.168.1.100:8000"
           :maxlength="255"
         >
           <template #prefix>
@@ -46,11 +34,10 @@
       <a-form-item
         label="用户名"
         name="username"
-        help="用于登录算法应用平台的用户名"
       >
         <a-input
           v-model:value="formData.username"
-          placeholder="请输入用户名"
+          placeholder="用于登录算法应用平台的用户名"
           :maxlength="100"
         >
           <template #prefix>
@@ -62,11 +49,10 @@
       <a-form-item
         label="密码"
         name="password"
-        help="用于登录算法应用平台的密码"
       >
         <a-input-password
           v-model:value="formData.password"
-          placeholder="请输入密码"
+          placeholder="用于登录算法应用平台的密码"
           :maxlength="255"
         >
           <template #prefix>

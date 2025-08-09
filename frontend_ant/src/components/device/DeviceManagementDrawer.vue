@@ -3,9 +3,9 @@
     v-model:open="visible"
     title="设备管理"
     placement="right"
-    :width="1200"
-    :closable="false"
-    :mask-closable="false"
+    :width="'70%'"
+    :closable="true"
+    :mask-closable="true"
     class="device-management-drawer"
   >
     <template #title>

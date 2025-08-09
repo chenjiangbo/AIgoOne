@@ -117,12 +117,85 @@ withDefaults(defineProps<Props>(), {
   border-radius: 12px;
   transition: all 0.3s ease;
   height: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.03;
+  transition: opacity 0.3s ease;
 }
 
 .stat-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: var(--color-primary-300);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.stat-card:hover::before {
+  opacity: 0.08;
+}
+
+/* 不同类型卡片的彩色背景和边框 */
+.stat-card.total {
+  border-left: 4px solid var(--color-primary-500);
+  background: linear-gradient(135deg, var(--color-primary-25), var(--bg-primary));
+}
+
+.stat-card.total::before {
+  background: linear-gradient(135deg, var(--color-primary-100), var(--color-primary-200));
+}
+
+.stat-card.total:hover {
+  border-color: var(--color-primary-400);
+  box-shadow: 0 8px 24px rgba(64, 169, 255, 0.2);
+}
+
+.stat-card.online {
+  border-left: 4px solid var(--color-success-500);
+  background: linear-gradient(135deg, var(--color-success-25), var(--bg-primary));
+}
+
+.stat-card.online::before {
+  background: linear-gradient(135deg, var(--color-success-100), var(--color-success-200));
+}
+
+.stat-card.online:hover {
+  border-color: var(--color-success-400);
+  box-shadow: 0 8px 24px rgba(82, 196, 26, 0.2);
+}
+
+.stat-card.offline {
+  border-left: 4px solid var(--color-neutral-400);
+  background: linear-gradient(135deg, var(--color-neutral-25), var(--bg-primary));
+}
+
+.stat-card.offline::before {
+  background: linear-gradient(135deg, var(--color-neutral-100), var(--color-neutral-200));
+}
+
+.stat-card.offline:hover {
+  border-color: var(--color-neutral-500);
+  box-shadow: 0 8px 24px rgba(144, 147, 153, 0.2);
+}
+
+.stat-card.error {
+  border-left: 4px solid var(--color-error-500);
+  background: linear-gradient(135deg, var(--color-error-25), var(--bg-primary));
+}
+
+.stat-card.error::before {
+  background: linear-gradient(135deg, var(--color-error-100), var(--color-error-200));
+}
+
+.stat-card.error:hover {
+  border-color: var(--color-error-400);
+  box-shadow: 0 8px 24px rgba(255, 77, 79, 0.2);
 }
 
 .stat-icon {
@@ -181,7 +254,43 @@ html.dark .stat-card {
 }
 
 html.dark .stat-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* 暗色主题下的彩色卡片 */
+html.dark .stat-card.total {
+  background: linear-gradient(135deg, var(--color-primary-950), var(--bg-primary));
+}
+
+html.dark .stat-card.total:hover {
   border-color: var(--color-primary-400);
+  box-shadow: 0 8px 24px rgba(64, 169, 255, 0.3);
+}
+
+html.dark .stat-card.online {
+  background: linear-gradient(135deg, var(--color-success-950), var(--bg-primary));
+}
+
+html.dark .stat-card.online:hover {
+  border-color: var(--color-success-400);
+  box-shadow: 0 8px 24px rgba(82, 196, 26, 0.3);
+}
+
+html.dark .stat-card.offline {
+  background: linear-gradient(135deg, var(--color-neutral-950), var(--bg-primary));
+}
+
+html.dark .stat-card.offline:hover {
+  border-color: var(--color-neutral-400);
+  box-shadow: 0 8px 24px rgba(144, 147, 153, 0.3);
+}
+
+html.dark .stat-card.error {
+  background: linear-gradient(135deg, var(--color-error-950), var(--bg-primary));
+}
+
+html.dark .stat-card.error:hover {
+  border-color: var(--color-error-400);
+  box-shadow: 0 8px 24px rgba(255, 77, 79, 0.3);
 }
 </style>

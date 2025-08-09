@@ -173,10 +173,12 @@ import { useRouter } from 'vue-router'
 import { message } from 'ant-design-vue'
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 import type { FormInstance, Rule } from 'ant-design-vue/es/form'
-import { login } from '@/api/auth'
+import { login, getUserInfo } from '@/api/auth'
+import { useUserStore } from '@/store'
 
 const router = useRouter()
 const loginFormRef = ref<FormInstance>()
+const userStore = useUserStore()
 
 // 表单数据
 const loginForm = reactive({
@@ -212,12 +214,33 @@ const handleLogin = async () => {
     })
     
     if (response.access_token) {
-      // 保存token
-      localStorage.setItem('token', response.access_token)
-      localStorage.setItem('user', JSON.stringify({ username: loginForm.username }))
+      console.log('登录成功，获得token:', response.access_token.substring(0, 20) + '...')
+      // 保存token到store
+      userStore.setToken(response.access_token)
       
-      message.success('登录成功！')
-      router.push('/dashboard')
+      try {
+        console.log('开始获取用户信息...')
+        // 获取完整用户信息
+        const userInfoResponse = await getUserInfo()
+        console.log('getUserInfo API返回:', userInfoResponse)
+        console.log('获取到的用户信息:', userInfoResponse.data)
+        userStore.setUserInfo(userInfoResponse.data)
+        
+        message.success('登录成功！')
+        router.push('/dashboard')
+      } catch (userInfoError) {
+        console.error('获取用户信息失败:', userInfoError)
+        console.error('错误详情:', userInfoError.response?.data)
+        // 即使获取用户信息失败，也允许继续登录，只是使用基本信息
+        const fallbackUser = { 
+          username: loginForm.username,
+          role: 'user' // 默认角色
+        }
+        console.log('使用fallback用户信息:', fallbackUser)
+        userStore.setUserInfo(fallbackUser)
+        message.success('登录成功！')
+        router.push('/dashboard')
+      }
     } else {
       errorMessage.value = '登录失败，请检查用户名和密码'
     }
@@ -612,8 +635,8 @@ onMounted(() => {
 
 .form-container {
   width: 100%;
-  max-width: 420px;
-  padding: 3rem;
+  max-width: 320px;
+  padding: 2rem;
   background: rgba(17, 24, 39, 0.7);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(59, 130, 246, 0.2);

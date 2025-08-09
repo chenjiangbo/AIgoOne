@@ -32,6 +32,26 @@ const routes: RouteRecordRaw[] = [
       title: '控制台',
       requiresAuth: true
     }
+  },
+  {
+    path: '/system',
+    name: 'System',
+    redirect: '/system/business-tree',
+    meta: {
+      title: '系统管理',
+      requiresAuth: true
+    },
+    children: [
+      {
+        path: 'business-tree',
+        name: 'BusinessTreeManagement',
+        component: () => import('@/views/system/business-tree/index.vue'),
+        meta: {
+          title: '业务树管理',
+          requiresAuth: true
+        }
+      }
+    ]
   }
 ]
 

@@ -36,19 +36,32 @@ class BusinessTreeService:
     @staticmethod
     def get_tree(db: Session, user_roles: List[str]) -> Dict:
         """获取完整业务树（根据用户角色过滤）"""
+        print(f"DEBUG: BusinessTreeService.get_tree 被调用，user_roles = {user_roles}")
+        
         # 获取根节点
         root = db.query(BusinessTreeNode).filter(
             BusinessTreeNode.parent_id == None
         ).first()
+        
+        print(f"DEBUG: 找到根节点: {root.name if root else 'None'}")
         
         if not root:
             root = BusinessTreeService.initialize_root_node(db)
         
         # 递归构建树
         def build_tree(node: BusinessTreeNode) -> Dict:
+            print(f"DEBUG: build_tree 处理节点: {node.name}, visible_roles: {node.visible_roles}")
+            
             # 检查节点是否对用户可见
             visible_roles = node.visible_roles or []
-            if visible_roles and not any(role in visible_roles for role in user_roles):
+            # 如果用户是管理员，或者节点没有权限限制，或者用户角色匹配，则可见
+            has_admin = "admin" in user_roles
+            has_matching_role = any(role in visible_roles for role in user_roles)
+            
+            print(f"DEBUG: 权限检查 - has_admin: {has_admin}, has_matching_role: {has_matching_role}, visible_roles: {visible_roles}")
+            
+            if visible_roles and not has_admin and not has_matching_role:
+                print(f"DEBUG: 节点 {node.name} 权限检查失败，返回 None")
                 return None
             
             node_dict = node.to_dict()

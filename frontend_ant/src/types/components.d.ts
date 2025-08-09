@@ -11,6 +11,8 @@ declare module 'vue' {
     AAlert: typeof import('ant-design-vue/es')['Alert']
     AAvatar: typeof import('ant-design-vue/es')['Avatar']
     ABadge: typeof import('ant-design-vue/es')['Badge']
+    ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
+    ABreadcrumbItem: typeof import('ant-design-vue/es')['BreadcrumbItem']
     AButton: typeof import('ant-design-vue/es')['Button']
     ACard: typeof import('ant-design-vue/es')['Card']
     ACheckbox: typeof import('ant-design-vue/es')['Checkbox']
@@ -43,6 +45,7 @@ declare module 'vue' {
     AppCard: typeof import('./../components/base/AppCard.vue')['default']
     AppModal: typeof import('./../components/base/AppModal.vue')['default']
     AProgress: typeof import('ant-design-vue/es')['Progress']
+    ARadio: typeof import('ant-design-vue/es')['Radio']
     ARadioButton: typeof import('ant-design-vue/es')['RadioButton']
     ARadioGroup: typeof import('ant-design-vue/es')['RadioGroup']
     ARangePicker: typeof import('ant-design-vue/es')['RangePicker']
@@ -74,7 +77,9 @@ declare module 'vue' {
     EditDeviceDialog: typeof import('./../components/device/EditDeviceDialog.vue')['default']
     HelloWorld: typeof import('./../components/HelloWorld.vue')['default']
     ImportDevicesDialog: typeof import('./../components/device/ImportDevicesDialog.vue')['default']
+    NodeEditDialog: typeof import('./../components/business/dialogs/NodeEditDialog.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SourceBindingModal: typeof import('./../components/business/source/SourceBindingModal.vue')['default']
   }
 }

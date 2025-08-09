@@ -64,11 +64,16 @@ async def get_business_tree(
     获取完整业务树（根据用户角色过滤）
     """
     try:
+        print(f"DEBUG: 当前用户信息 - ID: {current_user.id}, username: {current_user.username}, role: {current_user.role}")
         user_roles = [current_user.role] if current_user.role else []
+        print(f"DEBUG: 构造的用户角色列表: {user_roles}")
         tree = BusinessTreeService.get_tree(db, user_roles)
+        print(f"DEBUG: 获取到的树数据: {tree}")
         return {"success": True, "data": tree}
     except Exception as e:
         import traceback
+        print(f"DEBUG: 获取业务树时出错: {str(e)}")
+        print(f"DEBUG: 错误栈: {traceback.format_exc()}")
         return {"success": False, "message": f"获取业务树失败: {str(e)}", "traceback": traceback.format_exc(), "data": None}
 
 

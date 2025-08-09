@@ -3,11 +3,13 @@ import { defineStore } from 'pinia'
 export const useUserStore = defineStore('user', {
   state: () => ({
     token: localStorage.getItem('token') || '',
-    userInfo: null as any
+    userInfo: JSON.parse(localStorage.getItem('user') || 'null') as any
   }),
   
   getters: {
-    isLoggedIn: (state) => !!state.token
+    isLoggedIn: (state) => !!state.token,
+    isAdmin: (state) => state.userInfo?.role === 'admin' || state.userInfo?.is_superuser === true,
+    currentUser: (state) => state.userInfo
   },
   
   actions: {

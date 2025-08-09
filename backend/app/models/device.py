@@ -49,7 +49,7 @@ class VideoSource(BaseModel):
     source_type = Column(String(20), nullable=False, comment="类型")
     url = Column(String(500), nullable=False, comment="视频源地址")
     device_id = Column(Integer, ForeignKey("devices.id"), nullable=True, comment="关联设备ID")
-    business_node_id = Column(Integer, ForeignKey("business_nodes.id"), nullable=False, comment="业务节点ID")
+    business_node_id = Column(Integer, ForeignKey("business_tree_nodes.id"), nullable=True, comment="业务节点ID")
     status = Column(String(20), nullable=False, default="unknown", comment="状态")
     resolution = Column(String(20), nullable=True, comment="分辨率")
     thumbnail_url = Column(String(500), nullable=True, comment="缩略图地址")
@@ -57,7 +57,7 @@ class VideoSource(BaseModel):
     config = Column(Text, nullable=True, comment="配置信息JSON")
     
     device = relationship("Device", backref="video_sources")
-    business_node = relationship("BusinessNode", backref="video_sources")
+    # business_node = relationship("BusinessTreeNode", backref="video_sources")
     
     def __str__(self):
         return f"VideoSource(id={self.id}, name='{self.name}', type='{self.source_type}')"

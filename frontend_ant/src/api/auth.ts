@@ -48,5 +48,5 @@ export const logout = () => {
 
 // 获取用户信息
 export const getUserInfo = () => {
-  return request.get('/auth/user')
+  return request.get('/auth/me')
 }

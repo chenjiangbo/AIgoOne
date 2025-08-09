@@ -24,14 +24,18 @@
       </div>
       
       <div class="navbar-right">
-        <a-dropdown>
+        <a-dropdown v-if="userStore.isAdmin">
           <a-button type="text" class="nav-btn">
             <SettingOutlined />
-            <span>系统配置</span>
+            <span>系统管理</span>
             <DownOutlined />
           </a-button>
           <template #overlay>
             <a-menu @click="handleSystemMenuClick">
+              <a-menu-item key="business-tree">
+                <BankOutlined /> 业务树管理
+              </a-menu-item>
+              <a-menu-divider />
               <a-menu-item key="config">
                 <SettingOutlined /> 系统配置
               </a-menu-item>
@@ -159,10 +163,10 @@
             </a-button>
             <template #overlay>
               <a-menu @click="handleSettingsClick">
-                <a-menu-item key="business-tree">
+                <a-menu-item v-if="userStore.isAdmin" key="business-tree">
                   <BankOutlined /> 业务树管理
                 </a-menu-item>
-                <a-menu-divider />
+                <a-menu-divider v-if="userStore.isAdmin" />
                 <a-menu-item key="theme-toggle">
                   <template #icon>
                     <BulbOutlined v-if="!appStore.isDarkTheme" />
@@ -422,6 +426,9 @@ const handleTabChange = (key: string) => {
 // 顶部导航功能
 const handleSystemMenuClick = ({ key }: any) => {
   switch (key) {
+    case 'business-tree':
+      router.push('/system/business-tree')
+      break
     case 'config':
       systemConfigVisible.value = true
       break
@@ -494,7 +501,7 @@ const handleUserMenuClick = ({ key }: any) => {
 const handleSettingsClick = ({ key }: any) => {
   switch (key) {
     case 'business-tree':
-      message.info('业务树管理功能开发中...')
+      router.push('/system/business-tree')
       break
     case 'theme-toggle':
       appStore.toggleTheme()
@@ -521,6 +528,12 @@ onMounted(() => {
   // 检查登录状态
   if (!userStore.isLoggedIn) {
     router.push('/login')
+  } else {
+    // 调试：打印用户信息
+    console.log('当前用户信息:', JSON.stringify(userStore.currentUser))
+    console.log('用户角色:', userStore.currentUser?.role)
+    console.log('是否为管理员:', userStore.isAdmin)
+    console.log('localStorage中的用户信息:', localStorage.getItem('user'))
   }
 })
 </script>

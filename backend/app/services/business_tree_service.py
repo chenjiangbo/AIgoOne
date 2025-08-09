@@ -103,9 +103,8 @@ class BusinessTreeService:
         # 获取父节点
         parent = BusinessTreeService.get_node_by_id(db, parent_id)
         
-        # 检查父节点是否为叶子节点
-        if parent.is_leaf:
-            raise HTTPException(status_code=400, detail="不能在叶子节点下创建子节点")
+        # 注释：允许在任何节点下创建子节点，包括叶子节点
+        # 叶子节点在添加子节点后会自动更新为非叶子节点
         
         # 检查层级限制
         if parent.depth >= 4:
@@ -135,16 +134,15 @@ class BusinessTreeService:
             name=name,
             parent_id=parent_id,
             depth=parent.depth + 1,
-            is_leaf=True,  # 新创建的节点默认是叶子节点
+            is_leaf=True,  # 新创建的节点初始为叶子节点
             path=f"{parent.path}{parent.id}/",
             visible_roles=visible_roles or ["admin", "operator", "viewer"],
             created_by=user_id,
             updated_by=user_id
         )
         
-        # 如果父节点原本是叶子节点，更新为非叶子节点
-        if parent.is_leaf:
-            parent.is_leaf = False
+        # 父节点有子节点后，更新为非叶子节点
+        parent.is_leaf = False
         
         db.add(new_node)
         db.commit()
@@ -236,13 +234,11 @@ class BusinessTreeService:
         node = BusinessTreeService.get_node_by_id(db, node_id)
         new_parent = BusinessTreeService.get_node_by_id(db, new_parent_id)
         
-        # 检查是否为叶子节点
-        if not node.is_leaf:
-            raise HTTPException(status_code=400, detail="只能移动叶子节点")
+        # 注释：允许移动任何节点，包括有子节点的节点
+        # 移动时会连同所有子节点一起移动
         
-        # 检查新父节点是否为叶子节点
-        if new_parent.is_leaf:
-            raise HTTPException(status_code=400, detail="不能移动到叶子节点下")
+        # 注释：允许移动到任何节点下，包括叶子节点
+        # 叶子节点在接受子节点后会自动更新为非叶子节点
         
         # 检查是否移动到自己或子节点下
         if new_parent_id == node_id or new_parent.path.startswith(f"{node.path}{node.id}/"):
@@ -267,11 +263,23 @@ class BusinessTreeService:
         old_parent = node.parent
         
         # 更新节点信息
+        old_path = node.path
         node.parent_id = new_parent_id
         node.depth = new_parent.depth + 1
         node.path = f"{new_parent.path}{new_parent.id}/"
         node.updated_by = user_id
         node.updated_at = datetime.utcnow()
+        
+        # 递归更新所有子节点的深度和路径
+        def update_children_paths(parent_node):
+            for child in parent_node.children:
+                child.depth = parent_node.depth + 1
+                child.path = f"{parent_node.path}{parent_node.id}/"
+                child.updated_at = datetime.utcnow()
+                update_children_paths(child)
+        
+        # 更新所有子节点
+        update_children_paths(node)
         
         # 如果原父节点没有其他子节点了，将其更新为叶子节点
         remaining_children = db.query(BusinessTreeNode).filter(
@@ -284,9 +292,8 @@ class BusinessTreeService:
         if remaining_children == 0:
             old_parent.is_leaf = True
         
-        # 如果新父节点原本是叶子节点，更新为非叶子节点
-        if new_parent.is_leaf:
-            new_parent.is_leaf = False
+        # 新父节点现在有子节点，更新为非叶子节点
+        new_parent.is_leaf = False
         
         db.commit()
         db.refresh(node)
@@ -503,3 +510,110 @@ class BusinessTreeService:
         except Exception as e:
             db.rollback()
             raise HTTPException(status_code=500, detail=f"批量保存失败: {str(e)}")
+    
+    @staticmethod
+    def validate_tree_structure(db: Session) -> Dict[str, Any]:
+        """验证树结构的完整性和一致性"""
+        errors = []
+        
+        try:
+            # 获取所有节点
+            all_nodes = db.query(BusinessTreeNode).all()
+            
+            if not all_nodes:
+                return {"valid": False, "message": "树为空", "errors": ["树结构中没有节点"]}
+            
+            # 1. 检查根节点
+            root_nodes = [node for node in all_nodes if node.parent_id is None]
+            if len(root_nodes) != 1:
+                errors.append(f"根节点数量错误：应该有1个，实际有{len(root_nodes)}个")
+            
+            # 2. 检查每个节点的约束
+            for node in all_nodes:
+                # 检查深度限制
+                if node.depth > 5:
+                    errors.append(f"节点 '{node.name}' (ID: {node.id}) 深度超限：{node.depth} > 5")
+                
+                # 检查路径一致性
+                if node.parent_id is None:
+                    # 根节点路径应为 "/"
+                    if node.path != "/":
+                        errors.append(f"根节点路径错误：应为'/'，实际为'{node.path}'")
+                    if node.depth != 0:
+                        errors.append(f"根节点深度错误：应为0，实际为{node.depth}")
+                else:
+                    # 非根节点检查
+                    parent = next((n for n in all_nodes if n.id == node.parent_id), None)
+                    if not parent:
+                        errors.append(f"节点 '{node.name}' (ID: {node.id}) 的父节点不存在")
+                    else:
+                        # 检查深度一致性
+                        if node.depth != parent.depth + 1:
+                            errors.append(f"节点 '{node.name}' 深度不一致：应为{parent.depth + 1}，实际为{node.depth}")
+                        
+                        # 检查路径一致性
+                        expected_path = f"{parent.path}{parent.id}/"
+                        if node.path != expected_path:
+                            errors.append(f"节点 '{node.name}' 路径不一致：应为'{expected_path}'，实际为'{node.path}'")
+                
+                # 检查is_leaf状态
+                children = [n for n in all_nodes if n.parent_id == node.id]
+                has_children = len(children) > 0
+                if node.is_leaf and has_children:
+                    errors.append(f"节点 '{node.name}' 标记为叶子节点但有{len(children)}个子节点")
+                elif not node.is_leaf and not has_children:
+                    errors.append(f"节点 '{node.name}' 标记为非叶子节点但没有子节点")
+                
+                # 检查子节点数量限制
+                if len(children) > 100:
+                    errors.append(f"节点 '{node.name}' 子节点数量超限：{len(children)} > 100")
+                
+                # 检查同级节点名称唯一性
+                siblings = [n for n in all_nodes if n.parent_id == node.parent_id and n.id != node.id]
+                duplicate_names = [s for s in siblings if s.name == node.name]
+                if duplicate_names:
+                    errors.append(f"节点 '{node.name}' 与同级节点重名")
+            
+            # 3. 检查循环引用
+            def has_cycle(node_id, visited, path):
+                if node_id in path:
+                    return True
+                if node_id in visited:
+                    return False
+                
+                visited.add(node_id)
+                path.append(node_id)
+                
+                children = [n.id for n in all_nodes if n.parent_id == node_id]
+                for child_id in children:
+                    if has_cycle(child_id, visited, path):
+                        return True
+                
+                path.remove(node_id)
+                return False
+            
+            visited = set()
+            for root in root_nodes:
+                if has_cycle(root.id, visited, []):
+                    errors.append(f"检测到循环引用，从根节点 '{root.name}' 开始")
+            
+            # 返回验证结果
+            if errors:
+                return {
+                    "valid": False,
+                    "message": f"树结构验证失败，发现{len(errors)}个问题",
+                    "errors": errors
+                }
+            else:
+                return {
+                    "valid": True,
+                    "message": f"树结构验证通过，共检查{len(all_nodes)}个节点",
+                    "errors": []
+                }
+                
+        except Exception as e:
+            return {
+                "valid": False,
+                "message": f"验证过程中发生错误：{str(e)}",
+                "errors": [str(e)]
+            }

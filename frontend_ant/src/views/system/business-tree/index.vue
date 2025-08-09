@@ -5,7 +5,7 @@
       <div class="header-left">
         <div class="title-with-logo">
           <div class="page-logo">
-            <ApartmentOutlined />
+            <BranchesOutlined />
           </div>
           <div class="title-content">
             <h1 class="page-title">业务树管理</h1>
@@ -236,7 +236,7 @@ import {
   FolderOpenOutlined,
   SearchOutlined,
   VideoCameraOutlined,
-  ApartmentOutlined
+  BranchesOutlined
 } from '@ant-design/icons-vue'
 import SourceBindingModal from '@/components/business/source/SourceBindingModal.vue'
 import NodeEditModal from '@/components/business/dialogs/NodeEditDialog.vue'
@@ -289,10 +289,9 @@ const filteredBoundSources = computed(() => {
 const expandAllNodes = (nodes: BusinessTreeNode[]): string[] => {
   let keys: string[] = []
   nodes.forEach(node => {
-    if (!node.is_leaf) { // 只展开非叶子节点
-      keys.push(node.id.toString())
-    }
+    // 如果节点有子节点，就展开它
     if (node.children && node.children.length > 0) {
+      keys.push(node.id.toString())
       keys = keys.concat(expandAllNodes(node.children))
     }
   })
@@ -580,16 +579,11 @@ watch(
     }
     
     .page-logo {
-      font-size: 28px;
+      font-size: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 8px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--primary-color);
     }
     
     .title-content {
@@ -657,7 +651,8 @@ watch(
 }
 
 .tree-panel {
-  width: 30%;
+  width: 350px;
+  min-width: 300px;
   background: var(--bg-primary);
   border: 1px solid var(--border-base);
   border-radius: 6px;

@@ -293,11 +293,12 @@ async def validate_tree(
     """
     验证树结构合法性（需要管理员权限）
     """
-    # TODO: 实现树结构验证逻辑
-    # 检查：层级深度、子节点数量、路径一致性等
+    # 调用业务服务进行树结构验证
+    validation_result = BusinessTreeService.validate_tree_structure(db)
     
     return {
         "success": True,
-        "valid": True,
-        "message": "树结构验证通过"
+        "valid": validation_result["valid"],
+        "message": validation_result["message"],
+        "errors": validation_result.get("errors", [])
     }

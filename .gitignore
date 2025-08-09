@@ -82,3 +82,11 @@ htmlcov/
 .nuxt/
 .output/
 .nitro/
+
+# Local development configuration
+.claude/settings.local.json
+frontend_ant/src/types/components.d.ts
+
+# Test results and artifacts
+frontend_ant/test-results/
+frontend_ant/playwright-report/
